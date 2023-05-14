@@ -1,6 +1,6 @@
 {
     "name": "@zhorna/nuxt-starter",
-    "private": true,
+    "main": "./nuxt.config.ts",
     "scripts": {
         "build": "nuxt build",
         "dev": "nuxt dev",
@@ -14,5 +14,9 @@
         "@nuxtjs/apollo": "4.0.1-rc.5",
         "@nuxtjs/tailwindcss": "^6.6.8"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@nuxt/kit": "^3.4.3",
+        "defu": "^6.1.2",
+        "openapi-typescript": "^6.2.4"
+    }
 }
