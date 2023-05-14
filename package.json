@@ -10,6 +10,9 @@
     },
     "devDependencies": {
         "@types/node": "^18",
-        "nuxt": "^3.4.3"
-    }
+        "nuxt": "^3.4.3",
+        "@nuxtjs/apollo": "4.0.1-rc.5",
+        "@nuxtjs/tailwindcss": "^6.6.8"
+    },
+    "dependencies": {}
 }
