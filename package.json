@@ -1,5 +1,5 @@
 {
-    "name": "@zhorna/nuxt-starter",
+    "name": "@zhorna/nuxt-base",
     "main": "./nuxt.config.ts",
     "scripts": {
         "build": "nuxt build",
@@ -9,14 +9,14 @@
         "postinstall": "nuxt prepare"
     },
     "devDependencies": {
+        "@nuxt/devtools": "^0.4.6",
         "@types/node": "^18",
         "nuxt": "^3.4.3",
-        "@nuxtjs/apollo": "4.0.1-rc.5",
-        "openapi-typescript": "^6.2.4",
-        "@nuxtjs/tailwindcss": "^6.6.8"
+        "openapi-typescript": "^6.2.4"
     },
     "dependencies": {
         "@nuxt/kit": "^3.4.3",
+        "@nuxtjs/tailwindcss": "^6.6.8",
         "defu": "^6.1.2"
     }
 }
