@@ -5,6 +5,7 @@ import openapiTS, { OpenAPI3 } from "openapi-typescript";
 
 //https://github.com/nuxt-modules/apollo/blob/v5/src/module.ts
 import { defu } from "defu"
+import * as OpenAPI from 'openapi-typescript-codegen';
 
 
 
@@ -29,47 +30,22 @@ export default defineNuxtModule<ModuleOptions>({
     async setup(options, nuxt) {
         const { resolve } = createResolver(import.meta.url)
 
-
         //Generate types for API
         console.log(options)
 
 
 
-        // Public runtimeConfig
-        nuxt.options.runtimeConfig.public.squidex = defu(nuxt.options.runtimeConfig.public.squidex, {
-            valami: "dimi"
+        // Generate squidex client with openapi-typescript-codegen        
+        await OpenAPI.generate({
+            input: './schema.json',
+            output: resolve('./runtime/client'),
+            clientName: "squidex"            
         })
 
 
 
 
-        //Generate schema
-        const output = await openapiTS(options.schema)
-
-        // Generating types to be injected
-        const typeFilename = "squidex.d.ts";
-        addTemplate({
-            filename: typeFilename,
-            getContents: () => {
-                return output
-            },
-        })
-
-
-        // Injecting previously generated types
-        nuxt.hooks.hook('prepare:types', ({ references }) => {
-            references.push({ path: resolve(nuxt.options.buildDir, typeFilename) })
-        })
-
-
-
-
-        // squidexSetup(options.baseUrl)
-        //PATHS FOLDER: resolve(nuxt.options.buildDir, typeFilename)
-
-        addPlugin(resolve('./runtime/plugins/plugin'))
-
-
+        addPlugin(resolve('./runtime/plugins/index'))
 
         //Add squidex composables
         addImportsDir(resolve('./runtime/composables'))

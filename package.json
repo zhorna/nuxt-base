@@ -4,22 +4,25 @@
     "type": "module",
     "version": "0.0.1",
     "scripts": {
-        "dev": "nuxi dev .playground",
-        "build": "nuxt build .playground",
-        "generate": "nuxt generate .playground",
-        "preview": "nuxt preview .playground",
+        "dev": "nuxi dev",
+        "build": "nuxt build",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
         "lint": "eslint .",
-        "postinstall": "nuxt prepare .playground"
+        "postinstall": "nuxt prepare"
     },
     "devDependencies": {
         "@nuxt/devtools": "^0.4.6",
+        "@nuxt/kit": "^3.4.3",
         "@types/node": "^18",
-        "nuxt": "^3.4.3",
-        "openapi-typescript": "^6.2.4"
+        "nuxt": "^3.4.3"
     },
     "dependencies": {
         "@nuxtjs/tailwindcss": "^6.6.8",
-        "@nuxt/kit": "^3.4.3",
-        "defu": "^6.1.2"
+        "defu": "^6.1.2",
+        "openapi-fetch": "^0.1.4",
+        "openapi-typescript": "^6.2.4",
+        "openapi-typescript-codegen": "^0.24.0",
+        "openapi-typescript-fetch": "^1.1.3"
     }
 }

@@ -1,6 +1,7 @@
 import createClient from "openapi-fetch"
 import { ref } from "vue"
 import { paths } from "~/.nuxt/squidex"
+import { OpenAPI, SquidexClient } from "../squidex-client"
 
 
 
@@ -50,11 +51,9 @@ export const useSquidexGraphQL = () => {
 }
 
 
-/* type SquidexClient<T> = {
-    get: () => {}
-} */
-
-
+/* 
+TODO: Beállítani lehessen itt dolgokat TOKEN-t pl
+*/
 
 export const useSquidexClient = () => {
     const nuxtApp = useNuxtApp()
