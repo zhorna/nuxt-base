@@ -1,6 +1,5 @@
 {
     "name": "@zhorna/nuxt-base",
-    "main": "./nuxt.config.ts",
     "scripts": {
         "build": "nuxt build",
         "dev": "nuxt dev",
