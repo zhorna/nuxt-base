@@ -17,8 +17,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     const graphQLClient = "";
 
-
-
     return {
         provide: {
             squidex: {
