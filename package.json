@@ -1,12 +1,15 @@
 {
     "name": "@zhorna/nuxt-base",
     "main": "./nuxt.config.ts",
+    "type": "module",
+    "version": "0.0.1",
     "scripts": {
-        "build": "nuxt build",
-        "dev": "nuxt dev",
-        "generate": "nuxt generate",
-        "preview": "nuxt preview",
-        "postinstall": "nuxt prepare"
+        "dev": "nuxi dev .playground",
+        "build": "nuxt build .playground",
+        "generate": "nuxt generate .playground",
+        "preview": "nuxt preview .playground",
+        "lint": "eslint .",
+        "postinstall": "nuxt prepare .playground"
     },
     "devDependencies": {
         "@nuxt/devtools": "^0.4.6",
@@ -15,8 +18,8 @@
         "openapi-typescript": "^6.2.4"
     },
     "dependencies": {
-        "@nuxt/kit": "^3.4.3",
         "@nuxtjs/tailwindcss": "^6.6.8",
+        "@nuxt/kit": "^3.4.3",
         "defu": "^6.1.2"
     }
 }
