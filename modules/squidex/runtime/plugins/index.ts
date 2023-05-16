@@ -17,16 +17,16 @@ export default defineNuxtPlugin((nuxtApp) => {
         baseUrl: baseUrl ?? "https://cloud.squidex.io",
     }) */
 
-    const contentClient = Fetcher.for<paths>()
+/*     const contentClient = Fetcher.for<paths>()
 
 
-    console.log(runtimeConfig);
+    console.log(runtimeConfig); */
     
 
     // global configuration
-    contentClient.configure({
+    /* contentClient.configure({
         baseUrl: runtimeConfig.public.squidex.baseUrl ?? 'https://cloud.squidex.io'
-    })
+    }) */
 
 
     /* const contentClient = new SquidexClient({
@@ -42,7 +42,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     return {
         provide: {
             squidex: {
-                contentClient,
+                // contentClient,
                 graphQLClient
             }
         }

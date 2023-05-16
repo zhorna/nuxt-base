@@ -1,7 +1,7 @@
 import { defineNuxtModule, addPlugin, createResolver, addTemplate, addImports, addImportsDir } from '@nuxt/kit'
 import fs from "node:fs";
 import { Readable } from 'node:stream';
-import openapiTS, { OpenAPI3 } from "openapi-typescript";
+// import openapiTS, { OpenAPI3 } from "openapi-typescript";
 
 //https://github.com/nuxt-modules/apollo/blob/v5/src/module.ts
 import { defu } from "defu"
@@ -33,11 +33,11 @@ export default defineNuxtModule<ModuleOptions>({
         const { resolve } = createResolver(import.meta.url)
 
         //Generate types for API
-        const schema = options?.schema || import(resolve("./schema.json"))
+/*         const schema = options?.schema || import(resolve("./schema.json"))
 
-        const output = await openapiTS(schema)
+        const output = await openapiTS(schema) */
 
-        const typeFilename = "squidex.d.ts";
+        /* const typeFilename = "squidex.d.ts";
         addTemplate({
             filename: typeFilename,
             getContents: () => {
@@ -47,7 +47,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         nuxt.hooks.hook('prepare:types', ({ references }) => {
             references.push({ path: resolve(nuxt.options.buildDir, typeFilename) })
-        })
+        }) */
 
 
         nuxt.options.runtimeConfig.public.squidex = defu(nuxt.options.runtimeConfig.public.squidex, {

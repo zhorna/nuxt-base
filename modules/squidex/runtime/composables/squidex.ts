@@ -54,9 +54,9 @@ export const useSquidexGraphQL = () => {
 /* 
 TODO: Beállítani lehessen itt dolgokat TOKEN-t pl
 */
-
+/* 
 export const useSquidexClient = () => {
     const nuxtApp = useNuxtApp()
 
     return nuxtApp.$squidex.contentClient
-}
+} */
