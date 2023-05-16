@@ -7,7 +7,8 @@ export default defineNuxtConfig({
 
 
     modules: [
-        '@nuxtjs/tailwindcss'
+        '@nuxtjs/tailwindcss',
+        "nuxt-graphql-client"
     ],
 
     devtools: {
@@ -18,7 +19,21 @@ export default defineNuxtConfig({
     squidex: {
         schema,
         baseUrl: "https://cloud.squidex.io"
+    },
+
+
+    runtimeConfig: {
+        public: {
+            GQL_HOST: "https://squidex.zhorna.space/api/content/wolgornn/graphql"
+        }
+    },
+
+
+    'graphql-client': {
+        watch: true,
+        autoImport: true,
+        functionPrefix: 'Gql',
+        documentPaths: ['./queries'],
+        preferGETQueries: false
     }
-
-
 })

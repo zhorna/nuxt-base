@@ -15,16 +15,19 @@ export class SharedService {
     /**
      * Query contents across all schemas.
      * @param ids Comma-separated list of content IDs.
+     * @param ids Comma-separated list of content IDs.
      * @returns ContentResultDto Content items retrieved.
      * @throws ApiError
      */
     public querySharedContent(
+ids?: string,
 ids?: string,
 ): CancelablePromise<ContentResultDto> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/content/nuxt-module-dev/',
             query: {
+                'ids': ids,
                 'ids': ids,
             },
             errors: {

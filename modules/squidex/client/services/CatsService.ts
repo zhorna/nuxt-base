@@ -52,10 +52,24 @@ export class CatsService {
      * @param filter Optional OData filter.
      * @param q JSON query as well formatted json string. Overrides all other query parameters, except 'ids'.
      * @param ids Comma separated list of object IDs. Overrides all other query parameters.
+     * @param search Optional number of items to skip.
+     * @param top Optional number of items to take.
+     * @param skip Optional number of items to skip.
+     * @param orderby Optional OData order definition.
+     * @param filter Optional OData filter.
+     * @param q JSON query as well formatted json string. Overrides all other query parameters, except 'ids'.
+     * @param ids Comma separated list of object IDs. Overrides all other query parameters.
      * @returns CatsContentResultDto Content items retrieved.
      * @throws ApiError
      */
     public queryCatsContent(
+search?: string,
+top?: number,
+skip?: number,
+orderby?: string,
+filter?: string,
+q?: string,
+ids?: string,
 search?: string,
 top?: number,
 skip?: number,
@@ -68,6 +82,13 @@ ids?: string,
             method: 'GET',
             url: '/api/content/nuxt-module-dev/cats/',
             query: {
+                '$search': search,
+                '$top': top,
+                '$skip': skip,
+                '$orderby': orderby,
+                '$filter': filter,
+                'q': q,
+                'ids': ids,
                 '$search': search,
                 '$top': top,
                 '$skip': skip,
@@ -92,6 +113,8 @@ ids?: string,
  * Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param publish Set to true to autopublish content on create.
      * @param id The optional custom content ID.
+     * @param publish Set to true to autopublish content on create.
+     * @param id The optional custom content ID.
      * @returns CatsContentDto Content item created
      * @throws ApiError
      */
@@ -99,11 +122,15 @@ ids?: string,
 requestBody: CatsDataDto,
 publish?: boolean,
 id?: string,
+publish?: boolean,
+id?: string,
 ): CancelablePromise<CatsContentDto> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/api/content/nuxt-module-dev/cats/',
             query: {
+                'publish': publish,
+                'id': id,
                 'publish': publish,
                 'id': id,
             },
@@ -138,12 +165,16 @@ requestBody: QueryDto,
     /**
      * Get a 'Cats' content item.
      * @param id The ID of the object (usually GUID).
+     * @param id The ID of the object (usually GUID).
+     * @param version The version of the objec.
      * @param version The version of the objec.
      * @returns CatsContentDto Content item returned.
      * @throws ApiError
      */
     public getCatsContent(
 id: string,
+id: string,
+version?: number,
 version?: number,
 ): CancelablePromise<CatsContentDto> {
         return this.httpRequest.request({
@@ -151,8 +182,10 @@ version?: number,
             url: '/api/content/nuxt-module-dev/cats/{id}',
             path: {
                 'id': id,
+                'id': id,
             },
             query: {
+                'version': version,
                 'version': version,
             },
             errors: {
@@ -164,6 +197,7 @@ version?: number,
     /**
      * Upsert a 'Cats' content item.
      * @param id The ID of the object (usually GUID).
+     * @param id The ID of the object (usually GUID).
      * @param requestBody The data of the content.
  *
  * Please note that each field is an object with one entry per language.
@@ -172,12 +206,17 @@ version?: number,
  * Read more about it at: https://docs.squidex.io/04-guides/02-api.html
      * @param patch Makes the update as patch.
      * @param publish Set to true to autopublish content on create.
+     * @param patch Makes the update as patch.
+     * @param publish Set to true to autopublish content on create.
      * @returns CatsContentDto Content item created or updated.
      * @throws ApiError
      */
     public upsertCatsContent(
 id: string,
+id: string,
 requestBody: CatsDataDto,
+patch?: boolean,
+publish?: boolean,
 patch?: boolean,
 publish?: boolean,
 ): CancelablePromise<CatsContentDto> {
@@ -186,8 +225,11 @@ publish?: boolean,
             url: '/api/content/nuxt-module-dev/cats/{id}',
             path: {
                 'id': id,
+                'id': id,
             },
             query: {
+                'patch': patch,
+                'publish': publish,
                 'patch': patch,
                 'publish': publish,
             },
@@ -203,6 +245,7 @@ publish?: boolean,
     /**
      * Update a 'Cats' content item.
      * @param id The ID of the object (usually GUID).
+     * @param id The ID of the object (usually GUID).
      * @param requestBody The data of the content.
  *
  * Please note that each field is an object with one entry per language.
@@ -214,12 +257,14 @@ publish?: boolean,
      */
     public updateCatsContent(
 id: string,
+id: string,
 requestBody: CatsDataDto,
 ): CancelablePromise<CatsContentDto> {
         return this.httpRequest.request({
             method: 'PUT',
             url: '/api/content/nuxt-module-dev/cats/{id}',
             path: {
+                'id': id,
                 'id': id,
             },
             body: requestBody,
@@ -234,6 +279,7 @@ requestBody: CatsDataDto,
     /**
      * Patch a 'Cats' content item.
      * @param id The ID of the object (usually GUID).
+     * @param id The ID of the object (usually GUID).
      * @param requestBody The data of the content.
  *
  * Please note that each field is an object with one entry per language.
@@ -245,12 +291,14 @@ requestBody: CatsDataDto,
      */
     public patchCatsContent(
 id: string,
+id: string,
 requestBody: CatsDataDto,
 ): CancelablePromise<CatsContentDto> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/api/content/nuxt-module-dev/cats/{id}',
             path: {
+                'id': id,
                 'id': id,
             },
             body: requestBody,
@@ -265,12 +313,16 @@ requestBody: CatsDataDto,
     /**
      * Delete a 'Cats' content item.
      * @param id The ID of the object (usually GUID).
+     * @param id The ID of the object (usually GUID).
+     * @param permanent True when the entity should be deleted permanently.
      * @param permanent True when the entity should be deleted permanently.
      * @returns void 
      * @throws ApiError
      */
     public deleteCatsContent(
 id: string,
+id: string,
+permanent?: boolean,
 permanent?: boolean,
 ): CancelablePromise<void> {
         return this.httpRequest.request({
@@ -278,8 +330,10 @@ permanent?: boolean,
             url: '/api/content/nuxt-module-dev/cats/{id}',
             path: {
                 'id': id,
+                'id': id,
             },
             query: {
+                'permanent': permanent,
                 'permanent': permanent,
             },
             errors: {
@@ -293,10 +347,14 @@ permanent?: boolean,
      * Get a 'Cats' content item by id and version.
      * @param version The version of the objec.
      * @param id The ID of the object (usually GUID).
+     * @param version The version of the objec.
+     * @param id The ID of the object (usually GUID).
      * @returns CatsDataDto Content item returned.
      * @throws ApiError
      */
     public getVersionedCatsContent(
+version: number,
+id: string,
 version: number,
 id: string,
 ): CancelablePromise<CatsDataDto> {
@@ -304,6 +362,8 @@ id: string,
             method: 'GET',
             url: '/api/content/nuxt-module-dev/cats/{id}/{version}',
             path: {
+                'version': version,
+                'id': id,
                 'version': version,
                 'id': id,
             },
@@ -316,16 +376,19 @@ id: string,
     /**
      * Validates a 'Cats' content item.
      * @param id The ID of the object (usually GUID).
+     * @param id The ID of the object (usually GUID).
      * @returns any Content item is valid.
      * @throws ApiError
      */
     public validateCatsContent(
+id: string,
 id: string,
 ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/api/content/nuxt-module-dev/cats/{id}/validity',
             path: {
+                'id': id,
                 'id': id,
             },
             errors: {
@@ -358,11 +421,13 @@ requestBody: BulkUpdateContentsDto,
     /**
      * Change the status of a 'Cats' content item.
      * @param id The ID of the object (usually GUID).
+     * @param id The ID of the object (usually GUID).
      * @param requestBody The request to change content status.
      * @returns CatsContentDto Content status updated.
      * @throws ApiError
      */
     public changeCatsContent(
+id: string,
 id: string,
 requestBody: ChangeStatusDto,
 ): CancelablePromise<CatsContentDto> {
@@ -370,6 +435,7 @@ requestBody: ChangeStatusDto,
             method: 'PUT',
             url: '/api/content/nuxt-module-dev/cats/{id}/status',
             path: {
+                'id': id,
                 'id': id,
             },
             body: requestBody,

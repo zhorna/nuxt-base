@@ -1,12 +1,6 @@
-import createClient from "openapi-fetch"
-import { ref } from "vue"
-import { paths } from "~/.nuxt/squidex"
-import { OpenAPI, SquidexClient } from "../squidex-client"
-
-
-
 //TODO:
 // - AUTO része a modulnak
+
 
 
 
@@ -40,6 +34,12 @@ const _client2 = ref((() => {
         baseUrl: "https://squidex.zhorna.space"
     })
 })()) */
+
+
+
+
+export { useSquidexUtils } from "./utils"
+
 
 
 

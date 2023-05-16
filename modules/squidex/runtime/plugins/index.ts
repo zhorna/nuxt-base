@@ -1,8 +1,9 @@
 import { defineNuxtPlugin } from '#app'
 import createClient from 'openapi-fetch';
-import type { paths } from '.nuxt/squidex';
+import type { paths } from '#build/squidex.d.ts';
 import { Fetcher } from 'openapi-typescript-fetch'
-import { squidex as SquidexClient } from '../client';
+// import { squidex as SquidexClient } from '#build/squidex-client';
+
 
 export default defineNuxtPlugin((nuxtApp) => {
 
@@ -16,18 +17,21 @@ export default defineNuxtPlugin((nuxtApp) => {
         baseUrl: baseUrl ?? "https://cloud.squidex.io",
     }) */
 
-    /* const contentClient = Fetcher.for<paths>()
+    const contentClient = Fetcher.for<paths>()
 
+
+    console.log(runtimeConfig);
+    
 
     // global configuration
     contentClient.configure({
-        baseUrl: 'https://cloud.squidex.io'
-    }) */
-
-
-    const contentClient = new SquidexClient({
-        BASE: "https://cloud.squidex.io"
+        baseUrl: runtimeConfig.public.squidex.baseUrl ?? 'https://cloud.squidex.io'
     })
+
+
+    /* const contentClient = new SquidexClient({
+        BASE: "https://cloud.squidex.io"
+    }) */
 
     
     

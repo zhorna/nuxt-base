@@ -12,6 +12,7 @@ import * as OpenAPI from 'openapi-typescript-codegen';
 export interface ModuleOptions {
     baseUrl: string;
     schema: any;
+    appId: string;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -25,24 +26,47 @@ export default defineNuxtModule<ModuleOptions>({
     // Default configuration options of the Nuxt module
     defaults: {
         baseUrl: "https://cloud.squidex.io",
-        schema: ""
+        schema: "",
+        appId: ""
     },
     async setup(options, nuxt) {
         const { resolve } = createResolver(import.meta.url)
 
         //Generate types for API
-        console.log(options)
+        const schema = options?.schema || import(resolve("./schema.json"))
 
+        const output = await openapiTS(schema)
 
+        const typeFilename = "squidex.d.ts";
+        addTemplate({
+            filename: typeFilename,
+            getContents: () => {
+                return output
+            },
+        })
 
-        // Generate squidex client with openapi-typescript-codegen        
-        await OpenAPI.generate({
-            input: './schema.json',
-            output: resolve('./runtime/client'),
-            clientName: "squidex"            
+        nuxt.hooks.hook('prepare:types', ({ references }) => {
+            references.push({ path: resolve(nuxt.options.buildDir, typeFilename) })
         })
 
 
+        nuxt.options.runtimeConfig.public.squidex = defu(nuxt.options.runtimeConfig.public.squidex, {
+            baseUrl: options?.baseUrl,
+            appId: options?.appId
+        })
+
+
+        // Generate squidex client with openapi-typescript-codegen        
+        /* await OpenAPI.generate({
+            input: schema,
+            output: "./client",
+            clientName: "squidex"
+        }) */
+        /* await OpenAPI.generate({
+            input: schema,
+            output: resolve(nuxt.options.buildDir, './squidex-client'),
+            clientName: "squidex"
+        }) */
 
 
         addPlugin(resolve('./runtime/plugins/index'))
@@ -51,3 +75,33 @@ export default defineNuxtModule<ModuleOptions>({
         addImportsDir(resolve('./runtime/composables'))
     }
 })
+
+
+
+
+// Public runtimeConfig
+/* nuxt.options.runtimeConfig.public.squidex = defu(nuxt.options.runtimeConfig.public.squidex, {
+    valami: "dimi"
+}) */
+
+
+
+
+        //Generate schema
+        //TODO: Ha nincs meg ez a schema az optionsben akkor error hogy nincs meg
+/* const output = await openapiTS(options.schema)
+
+// Generating types to be injected
+const typeFilename = "squidex.d.ts";
+addTemplate({
+    filename: typeFilename,
+    getContents: () => {
+        return output
+    },
+}) */
+
+
+        // Injecting previously generated types
+/* nuxt.hooks.hook('prepare:types', ({ references }) => {
+    references.push({ path: resolve(nuxt.options.buildDir, typeFilename) })
+}) */

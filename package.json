@@ -20,6 +20,7 @@
     "dependencies": {
         "@nuxtjs/tailwindcss": "^6.6.8",
         "defu": "^6.1.2",
+        "nuxt-graphql-client": "^0.2.27",
         "openapi-fetch": "^0.1.4",
         "openapi-typescript": "^6.2.4",
         "openapi-typescript-codegen": "^0.24.0",
