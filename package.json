@@ -2,7 +2,7 @@
     "name": "@zhorna/nuxt-base",
     "main": "./nuxt.config.ts",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.1.5",
     "scripts": {
         "dev": "nuxi dev",
         "build": "nuxt build",
